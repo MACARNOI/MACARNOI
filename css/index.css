@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 130px;
+
 }
 
 .sidebar .avatar {
@@ -375,4 +376,79 @@ body {
 
 .content-area .rooter .design {
   color: #707070;
+}
+
+.about {
+  background-color: #fff;
+  margin-right: 6px;
+  border-radius: 10px;
+  margin-left: -4px;
+}
+
+.about .article-header {
+  padding: 26px;
+}
+
+.about .article-header .title h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.about .article-content {
+  all: initial;
+  /* 清除所有继承和非继承样式，包括 12px 字体 */
+  font-size: 16px;
+  /* 恢复浏览器默认基准字体大小 */
+  display: block;
+  /* initial 会变成 inline，须手动改回块级 */
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #333;
+  /* 根据设计补回文字颜色 */
+  line-height: 1.5;
+  /* 可调整行高 */
+  padding: 0 30px;
+}
+
+.about .article-content * {
+  all: revert;
+
+}
+
+.about .article-content h1,
+.about .article-content h2,
+.about .article-content h3,
+.about .article-content h4,
+.about .article-content h5,
+.about .article-content h6 {
+  margin-left: -30px;
+  padding-left: 30px;
+  box-shadow: inset 4px 0 0 0 #000;
+}
+
+.about .article-content hr {
+  border: none;
+  height: 4px;
+  /* 线条粗细 = 高度 */
+  background-color: #767676;
+  margin: 40px 0;
+}
+
+.about .blog-rooter {
+  margin-top: 24px;
+  display: flex;
+  padding: 0 30px 30px;
+}
+
+.about .blog-rooter .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.2;
+  color: #767676;
+}
+
+.about .blog-rooter span {
+  margin-left: 14px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #767676;
 }
