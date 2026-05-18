@@ -1,0 +1,14 @@
+[
+  {
+    "title": "GitHub",
+    "url": "https://github.com",
+    "description": "全球最大的代码托管平台",
+    "icon": "./assets/friends/github.png"
+  },
+  {
+    "title": "Bilibili",
+    "url": "https://www.bilibili.com",
+    "description": "国内知名的视频弹幕网站",
+    "icon": "./assets/friends/bilibili.png"
+  }
+]

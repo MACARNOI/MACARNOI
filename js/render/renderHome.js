@@ -1,6 +1,6 @@
-// renderHome.js
+// js/render/renderHome.js
 
-/* ===== 工具函数：解析 Front Matter（与之前相同） ===== */
+/* ========== 工具：解析 Front Matter ========== */
 function parseFrontMatter(mdText) {
   const match = mdText.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)/);
   if (!match) return { title: '未命名', date: '', content: mdText };
@@ -18,17 +18,19 @@ function parseFrontMatter(mdText) {
   return { title: meta.title || '未命名', date: meta.date || '', content: body };
 }
 
-/* ===== 构建单个卡片 ===== */
+/* ========== 构建单个博客卡片 ========== */
 function buildCardHTML(post, category) {
   return `
     <li>
       <div class="img">
-        <a href="#"><img src="${post.cover}" alt="${post.title}"></a>
+        <a href="#" data-page="blog" data-post="${post.path}">
+          <img src="${post.cover || './assets/blog.png'}" alt="${post.title}">
+        </a>
       </div>
       <div class="text">
         <div class="categories"><a href="#">${category}</a></div>
         <div class="title">
-          <h2><a href="#">${post.title}</a></h2>
+          <h2><a href="#" data-page="blog" data-post="${post.path}">${post.title}</a></h2>
           <h3>${post.subtitle || ''}</h3>
         </div>
         <div class="edit-time">
@@ -51,19 +53,20 @@ function buildCardHTML(post, category) {
   `;
 }
 
-/* ===== 构建分页导航 ===== */
+/* ========== 构建分页导航 ========== */
 function buildPaginationHTML(currentPage, totalPages) {
+  if (totalPages <= 1) return '';
   let html = '<ul>';
   for (let i = 1; i <= totalPages; i++) {
     html += `<li><a href="#" class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</a></li>`;
   }
   html += '</ul>';
-  return html;
+  return `<div class="nav">${html}</div>`;
 }
 
-/* ===== 构建右侧边栏（归档 + 分类） ===== */
+/* ========== 构建右侧边栏（归档 + 分类 + 搜索） ========== */
 function buildRightSidebar(posts) {
-  // 1. 归档：按年份统计文章数量
+  // 1. 归档：按年份统计
   const yearCounts = {};
   posts.forEach(post => {
     if (post.date) {
@@ -71,10 +74,10 @@ function buildRightSidebar(posts) {
       if (year) yearCounts[year] = (yearCounts[year] || 0) + 1;
     }
   });
-  const years = Object.keys(yearCounts).sort((a, b) => b.localeCompare(a)); // 降序
+  const years = Object.keys(yearCounts).sort((a, b) => b.localeCompare(a));
   const archivesHTML = years.map(year => `
     <li>
-      <a href="#">
+      <a href="#" data-page="archives" data-year="${year}">
         <span class="year">${year}</span>
         <span class="count">${yearCounts[year]}</span>
       </a>
@@ -82,18 +85,17 @@ function buildRightSidebar(posts) {
   `).join('');
 
   // 2. 分类：从 path 提取第一级文件夹名
-  const categories = {};
+  const categoriesSet = new Set();
   posts.forEach(post => {
     const parts = post.path.split('/');
     const cat = parts.length > 1 ? parts[0] : '未分类';
-    categories[cat] = true;
+    categoriesSet.add(cat);
   });
-  const uniqueCategories = Object.keys(categories).sort();
+  const uniqueCategories = Array.from(categoriesSet).sort();
   const categoriesHTML = uniqueCategories.map(cat => `
-    <li><a href="">${cat}</a></li>
+    <li><a href="#" data-page="category" data-category="${cat}">${cat}</a></li>
   `).join('');
 
-  // 3. 组装完整右侧栏（搜索框保留原样）
   return `
     <div class="right">
       <div class="search">
@@ -124,9 +126,7 @@ function buildRightSidebar(posts) {
           </svg>
         </div>
         <div class="title">归档</div>
-        <div class="columns">
-          <ul>${archivesHTML}</ul>
-        </div>
+        <div class="columns"><ul>${archivesHTML}</ul></div>
       </div>
 
       <div class="cate">
@@ -142,15 +142,13 @@ function buildRightSidebar(posts) {
           </svg>
         </div>
         <div class="title">分类</div>
-        <div class="tag">
-          <ul>${categoriesHTML}</ul>
-        </div>
+        <div class="tag"><ul>${categoriesHTML}</ul></div>
       </div>
     </div>
   `;
 }
 
-/* ===== 主页渲染（带右侧边栏） ===== */
+/* ========== 主页渲染 ========== */
 async function renderHomePage(page = 1) {
   const container = document.getElementById('dynamic-content');
   if (!container) return;
@@ -158,23 +156,26 @@ async function renderHomePage(page = 1) {
   container.innerHTML = '<p style="text-align:center;color:#707070;">加载文章列表...</p>';
 
   try {
-    // 加载文章索引
+    // 1. 加载文章索引
     const indexRes = await fetch('./posts/index.json');
-    if (!indexRes.ok) throw new Error('文章索引不存在');
+    if (!indexRes.ok) throw new Error('索引加载失败');
     const allPosts = await indexRes.json();
 
-    // 加载每页显示数量配置
+    // ** 按日期降序排序（最新的在最前） **
+    allPosts.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+    // 2. 加载每页显示数量配置
     const configRes = await fetch('./assets/home-config.json');
     const config = configRes.ok ? await configRes.json() : { postsPerPage: 5 };
     const postsPerPage = config.postsPerPage || 5;
 
-    // 分页计算
+    // 3. 分页计算
     const totalPages = Math.ceil(allPosts.length / postsPerPage);
     const start = (page - 1) * postsPerPage;
     const end = start + postsPerPage;
     const pagePosts = allPosts.slice(start, end);
 
-    // 生成卡片 HTML
+    // 4. 生成卡片 HTML
     let cardsHTML = '';
     pagePosts.forEach(post => {
       const parts = post.path.split('/');
@@ -182,34 +183,26 @@ async function renderHomePage(page = 1) {
       cardsHTML += buildCardHTML(post, category);
     });
 
-    // 生成分页导航（总页数 > 1 才显示）
-    const paginationHTML = totalPages > 1
-      ? `<div class="nav">${buildPaginationHTML(page, totalPages)}</div>`
-      : '';
-
-    // 生成右侧边栏（基于全部文章数据）
-    const rightSidebarHTML = buildRightSidebar(allPosts);
-
-    // 组装最终主页
+    // 5. 组装整个主页
     const homeHTML = `
       <div class="home">
         <div class="post-card">
           <div class="post">
             <ul>${cardsHTML}</ul>
           </div>
-          ${paginationHTML}
+          ${buildPaginationHTML(page, totalPages)}
         </div>
-        ${rightSidebarHTML}
+        ${buildRightSidebar(allPosts)}
       </div>
     `;
 
     container.innerHTML = homeHTML;
 
-    // 绑定分页点击事件
+    // 6. 绑定分页点击事件
     const navDiv = container.querySelector('.nav');
     if (navDiv) {
       navDiv.addEventListener('click', (e) => {
-        const a = e.target.closest('a');
+        const a = e.target.closest('a[data-page]');
         if (!a) return;
         e.preventDefault();
         const newPage = parseInt(a.getAttribute('data-page'), 10);
@@ -222,7 +215,7 @@ async function renderHomePage(page = 1) {
 
   } catch (error) {
     console.error('加载文章失败:', error);
-    container.innerHTML = '<p style="color:red;">文章列表加载失败，请检查 posts/index.json</p>';
+    container.innerHTML = '<p style="color:red;">文章列表加载失败，请检查 posts/index.json 是否存在。</p>';
   }
 }
 

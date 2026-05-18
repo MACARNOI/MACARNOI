@@ -1,9 +1,12 @@
-// app.js
 async function init() {
-  await renderSidebar();          // 先渲染侧边栏
-  initSidebarEvents();            // 再绑定菜单事件
+  await renderSidebar();
+  initSidebarEvents();
+  // 当归档页面渲染完成后
+  if (typeof initHorizontalScroll === 'function') {
+    initHorizontalScroll('.archives .box ul');
+  }
   // 默认加载首页
-  // loadPage('home', renderHomePage);
+  loadPage('home', () => window.renderHomePage(1));
 }
 
 init();

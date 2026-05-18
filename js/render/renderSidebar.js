@@ -1,7 +1,7 @@
 async function renderSidebar() {
   try {
     // 1. 加载配置文件
-    const response = await fetch('./assets/sidebar/config.json');
+    const response = await fetch('./config/sidebar.json');
     const config = await response.json();
 
     // 2. 根据 social 数组动态生成社交链接 HTML

@@ -17,112 +17,11 @@
   <main class="content-area">
     <div id="dynamic-content">
 
-      <!-- 关于页面 -->
-      <div class="about">
-        <!-- 文章部分 -->
-        <article class="main-acticle">
-          <!-- 文章头部 -->
-          <header class="article-header">
-            <div class="title">
-              <h2><a href="#">关于</a></h2>
-            </div>
-          </header>
-          <!-- 文章内容部分 -->
-          <section class="article-content">
-            <h2 id="2026年3月网站运营成本公示">2026年3月网站运营成本公示
-            </h2>
-            <h4 id="服务器">服务器
-            </h4>
-            <ul>
-              <li>
-                <p>网站服务器：382.56元</p>
-              </li>
-              <li>
-                <p>OVH服务器：39.82元</p>
-              </li>
-              <li>
-                <p>NETCUP邮局服务器：47.47元</p>
-              </li>
-            </ul>
-            <h4 id="cdn">CDN
-            </h4>
-            <ul>
-              <li>CDN机器1：419.53元</li>
-            </ul>
-            <h4 id="对象存储">对象存储
-            </h4>
-            <ul>
-              <li>Backblaze B2：1186.51元</li>
-            </ul>
-            <h4 id="总计207589元">总计：2075.89元
-            </h4>
-            <h2 id="2026年3月用户捐赠公示">2026年3月用户捐赠公示
-            </h2>
-            <p>截至2026年3月31日23:59，本站共收到89笔捐赠，捐赠数额共计2015元。图表里对不上是因为图表显示的是过去30天的数据而3月有31天。</p>
-            <p class="no-text">
-            <div class="gallery">
-              <figure style="flex-grow: 161; flex-basis: 388px;" class="gallery-image"><a
-                  href="./2026年3月捐赠月度总结_files/screenshot.png" target="_blank"><img
-                    src="./2026年3月捐赠月度总结_files/screenshot.png" width="860" height="531"
-                    srcset="/p/202603dona/screenshot_hu_1e43f12f9c074721.png 480w, /p/202603dona/screenshot_hu_252d25902bff2f26.png 1024w"
-                    loading="lazy" class="gallery-image" data-flex-grow="161" data-flex-basis="388px"></a></figure>
-            </div>
-            </p>
-            <p>你可以从这里下载到3月1日到31日的捐赠详情的excel表：https://pan.touchgal.net/s/gg8lUL</p>
-            <h2 id="2026年3月用户超额捐赠处理公示">2026年3月用户超额捐赠处理公示
-            </h2>
-            <p>2026年3月没有超额捐赠，故不做处理</p>
-            <h2 id="2026年4月网站运营成本预算公示">2026年4月网站运营成本预算公示
-            </h2>
-            <h4 id="服务器-1">服务器
-            </h4>
-            <ul>
-              <li>
-                <p>网站服务器：382.56元</p>
-              </li>
-              <li>
-                <p>OVH服务器：39.82元</p>
-              </li>
-              <li>
-                <p>NETCUP邮局服务器：47.47元</p>
-              </li>
-            </ul>
-            <h4 id="cdn-1">CDN
-            </h4>
-            <ul>
-              <li>CDN机器1：419.53元</li>
-            </ul>
-            <h4 id="对象存储-1">对象存储
-            </h4>
-            <ul>
-              <li>Backblaze B2：1186.51元</li>
-            </ul>
-            <h4 id="总计207589元-1">总计：2075.89元
-            </h4>
-            <hr>
-            <h1 id="感谢您的捐赠">感谢您的捐赠
-            </h1>
-
-          </section>
-        </article>
-
-        <!-- 版权授权 -->
-        <div class="blog-rooter">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="icon icon-tabler icons-tabler-outline icon-tabler-copyright">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-            <path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" />
-          </svg>
-
-          <span>Licensed under CC BY-NC-SA 4.0</span>
-        </div>
-      </div>
-      </article>
     </div>
 
-    </div>
+
+
+
 
     <!-- 版权栏 -->
     <div class="rooter">
@@ -138,13 +37,20 @@
 
   <!-- 引入 marked.js 和你的主逻辑 -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <!-- 渲染事件 -->
   <script src="./js/render/renderSidebar.js"></script>
   <script src="./js/render/renderAbout.js"></script>
+  <script src="./js/render/renderBlog.js"></script>
+  <script src="./js/render/renderCategoryPage.js"></script>
   <script src="./js/render/renderHome.js"></script>
-  <!-- 任务事件 -->
+  <script src="./js/render/renderArchives.js"></script>
+  <script src="./js/render/renderSearchPage.js"></script>
+  <script src="./js/render/renderFriendsPage.js"></script>
+  <!-- 事件模块 -->
   <script src="./js/events/sidebarEvents.js"></script>
-  <!-- 总调度 -->
+  <script src="./js/events/blogNav.js"></script>
+  <script src="./js/events/globalEvents.js"></script>
+  <script src="./js/events/horizontalScroll.js"></script>
+  <!-- 入口 -->
   <script src="./js/app.js"></script>
 
 </body>

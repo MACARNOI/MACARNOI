@@ -91,17 +91,17 @@ function toggleDarkMode() {
 //   container.innerHTML = '<p>👤 关于页面加载中...</p>';
 // }
 
-function renderArchivesPage() {
-  const container = document.getElementById('dynamic-content');
-  container.innerHTML = '<p>📁 归档页面加载中...</p>';
-}
+// function renderArchivesPage() {
+//   const container = document.getElementById('dynamic-content');
+//   container.innerHTML = '<p>📁 归档页面加载中...</p>';
+// }
 
-function renderSearchPage() {
-  const container = document.getElementById('dynamic-content');
-  container.innerHTML = '<p>🔍 搜索页面加载中...</p>';
-}
+// function renderSearchPage() {
+//   const container = document.getElementById('dynamic-content');
+//   container.innerHTML = '<p>🔍 搜索页面加载中...</p>';
+// }
 
-function renderFriendsPage() {
-  const container = document.getElementById('dynamic-content');
-  container.innerHTML = '<p>🔗 友链页面加载中...</p>';
-}
+// function renderFriendsPage() {
+//   const container = document.getElementById('dynamic-content');
+//   container.innerHTML = '<p>🔗 友链页面加载中...</p>';
+// }

@@ -1,3 +1,10 @@
+html {
+  overflow-y: scroll;
+  /* 始终显示垂直滚动条 */
+  scrollbar-gutter: stable;
+  /* 更现代的做法，预留滚动条空间 */
+}
+
 body {
   display: flex;
   width: 1510px;
@@ -27,10 +34,9 @@ body {
 }
 
 .sidebar .avatar img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .sidebar .avatar .emoji {
@@ -226,6 +232,8 @@ body {
   flex-direction: column;
   margin-left: 960px;
   margin-right: 100px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
 
 .home .right .search {
@@ -426,11 +434,12 @@ body {
 }
 
 .about .article-content hr {
+  width: 100px;
   border: none;
-  height: 4px;
+  height: 2px;
   /* 线条粗细 = 高度 */
   background-color: #767676;
-  margin: 40px 0;
+  margin: 40px auto;
 }
 
 .about .blog-rooter {
@@ -451,4 +460,852 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #767676;
+}
+
+.about .article-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* 去除图片下方空隙 */
+  margin: 1em 0;
+}
+
+.blog {
+  display: flex;
+}
+
+.blog .left {
+  background-color: #fff;
+  margin-right: 412px;
+  border-radius: 10px;
+  margin-left: 0px;
+  overflow: hidden;
+}
+
+.blog .article-header {
+  padding: 30px 30px 0;
+}
+
+.blog .article-header .title h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.blog .article-content {
+  all: initial;
+  /* 清除所有继承和非继承样式，包括 12px 字体 */
+  font-size: 16px;
+  /* 恢复浏览器默认基准字体大小 */
+  display: block;
+  /* initial 会变成 inline，须手动改回块级 */
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #333;
+  /* 根据设计补回文字颜色 */
+  line-height: 1.5;
+  /* 可调整行高 */
+  padding: 0 30px;
+}
+
+.blog .article-content * {
+  all: revert;
+
+}
+
+.blog .article-content h1,
+.blog .article-content h2,
+.blog .article-content h3,
+.blog .article-content h4,
+.blog .article-content h5,
+.blog .article-content h6 {
+  margin-left: -30px;
+  padding-left: 30px;
+  box-shadow: inset 4px 0 0 0 #000;
+}
+
+.blog .article-content hr {
+  width: 100px;
+  border: none;
+  height: 2px;
+  /* 线条粗细 = 高度 */
+  background-color: #767676;
+  margin: 40px auto;
+}
+
+.blog .blog-rooter {
+  margin-top: 24px;
+  display: flex;
+  padding: 0 30px 30px;
+}
+
+.blog .blog-rooter .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.2;
+  color: #767676;
+}
+
+.blog .blog-rooter span {
+  margin-left: 14px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #767676;
+}
+
+.blog .article-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  /* 去除图片下方空隙 */
+  margin: 1em 0;
+}
+
+
+.post-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 关键属性：覆盖整个区域，可能裁剪边缘 */
+}
+
+.blog .text .categories a {
+  margin-top: 4px;
+  border-radius: 5px;
+  background-color: #2a9d8f;
+  display: inline-block;
+  padding: 5px 16px;
+  font-size: 14px;
+  color: #fff;
+  margin-right: 12px;
+}
+
+.blog .text h2 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.blog .text h3 {
+  font-size: 20px;
+  color: #747474;
+  margin-bottom: 16px;
+}
+
+.blog .text .edit-time {
+  display: flex;
+  height: 20px;
+  line-height: 20px;
+  color: #767676;
+}
+
+.blog .text .edit-time .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.2;
+  margin-right: 16px;
+}
+
+.blog .text .edit-time .time {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.blog .cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog .right {
+  position: fixed;
+  margin-left: 964px;
+}
+
+.blog .nav .svg {
+  display: flex;
+}
+
+.blog .nav .icon {
+  width: 32px;
+  height: 32px;
+  color: #707070;
+  stroke-width: 1.5;
+}
+
+.blog .nav .title {
+  color: #707070;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.blog .nav .nav-elevator {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.blog .nav .nav-elevator {
+  all: initial;
+  /* 清除所有继承和非继承样式，包括 12px 字体 */
+  font-size: 16px;
+  /* 恢复浏览器默认基准字体大小 */
+  display: block;
+  /* initial 会变成 inline，须手动改回块级 */
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #333;
+  /* 根据设计补回文字颜色 */
+  line-height: 1.5;
+  /* 可调整行高 */
+  border-radius: 10px;
+  background-color: #fff;
+  width: 370px;
+  padding: 1px 0;
+  max-height: calc(100vh - 180px);
+  /* 预留标题和顶部距离 */
+  overflow-y: auto;
+}
+
+.blog .nav .nav-elevator a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  background: transparent;
+}
+
+.blog .nav .nav-elevator * {
+  all: revert;
+}
+
+.blog .nav .nav-elevator ol li::marker {
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.blog .nav .nav-elevator ul {
+  list-style-type: disc;
+  /* 实心圆点 */
+  padding-left: 1.5em;
+  /* 控制缩进，保证圆点可见 */
+}
+
+.blog .nav .nav-elevator ul li::marker {
+  margin-right: 5px;
+}
+
+.blog .nav .nav-elevator li {
+  margin: 12px 0;
+}
+
+.blog .nav .nav-elevator a {
+  padding-left: 5px;
+  color: #34495E;
+}
+
+.blog .nav .nav-elevator .active {
+  display: block;
+  /* 核心：左侧内部阴影模拟边框，紧贴元素左边缘 */
+  box-shadow: inset 4px 0 0 0 #000;
+  font-weight: bold;
+  /* 右侧留出呼吸空间，左侧为边框和文字间距 */
+  margin-left: -40px;
+  padding-left: 45px;
+}
+
+.archives {
+  margin-left: -6px;
+}
+
+.archives .A-categories {
+  margin-bottom: 40px;
+}
+
+.archives .title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #707070;
+}
+
+.archives .box {
+  margin-top: 6px;
+}
+
+.archives .box ul {
+  display: flex;
+  flex-wrap: nowrap;
+  /* 强制不换行 */
+  overflow-x: auto;
+  /* 横向滚动 */
+}
+
+.archives .box li {
+  margin-right: 20px;
+  flex-shrink: 0;
+
+}
+
+.archives .box li:last-child {
+  margin-right: 0;
+}
+
+.archives .box a {
+  position: relative;
+  /* 开启定位上下文 */
+  display: block;
+  width: 250px;
+  height: 150px;
+  border-radius: 10px;
+  overflow: hidden;
+  /* 裁剪溢出圆角 */
+  /* 移除粉红色背景，换成默认透明或任意备用色 */
+  background-color: #f0f0f0;
+  /* 图片未加载时的占位色 */
+}
+
+.archives .box a img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
+}
+
+/* 用伪元素在图片上覆盖一层渐变阴影，从底部到中央逐渐透明 */
+.archives .box a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  /* 渐变覆盖下方 70% 区域 */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+  /* 让点击穿透到链接 */
+  border-radius: 0 0 10px 10px;
+  /* 跟随底部圆角，避免溢色 */
+}
+
+/* 文字样式（可根据你的需求调整） */
+.archives .box a div {
+  position: absolute;
+  font-size: 18px;
+  bottom: 10px;
+  left: 12px;
+  right: 12px;
+  color: #fff;
+  /* 白色文字 */
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  /* 额外文字阴影，双重保险 */
+  z-index: 1;
+  /* 保持在阴影层之上 */
+}
+
+.archives .year {
+  margin-bottom: 40px;
+}
+
+.archives .year-title {
+  font-size: 16px;
+  color: #707070;
+  font-weight: 700;
+}
+
+.archives .year-box ul {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.archives .year-box li {
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.archives .year-box li:last-child {
+  border: 0;
+}
+
+.archives .year-box a {
+  display: flex;
+}
+
+.archives .blog-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.archives .time {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  color: #767676;
+}
+
+.archives .year-box .right {
+  margin-left: auto;
+  width: 60px;
+  height: 60px;
+}
+
+.archives .year-box img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
+}
+
+.categories {
+  display: flex;
+  margin-left: -6px;
+}
+
+.categories .content {
+  width: 922px;
+}
+
+.categories h3 {
+  font-size: 16px;
+  color: #707070;
+  font-weight: 700;
+}
+
+.categories .titlebox {
+  display: flex;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 40px;
+}
+
+.categories .titlebox h3 {
+  font-size: 14px;
+  color: #767676;
+  font-weight: 700;
+}
+
+.categories .cate-title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.categories .cate-description {
+  font-size: 16px;
+  margin-top: 4px;
+  color: #767676;
+}
+
+.categories .titlebox .right {
+  margin-left: 812px;
+  width: 60px;
+  height: 60px;
+}
+
+.categories .titlebox img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
+}
+
+.categories .nav {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.categories .nav ul {
+  display: flex;
+  background-color: #fff;
+}
+
+.categories .nav a {
+  display: inline-block;
+  padding: 16px 32px;
+  font-size: 16px;
+  color: #747474;
+}
+
+.categories .nav .active {
+  background-color: #eaeaea;
+  font-weight: 700;
+  color: #000000;
+}
+
+.categories .right {
+  position: fixed;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-left: 960px;
+  margin-right: 100px;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
+}
+
+.categories .right .search {
+  display: flex;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 8px 20px 12px;
+}
+
+.categories .right .search .left {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.categories .right .search .left span {
+  font-size: 13px;
+  color: #767676;
+}
+
+.categories .right .search .left input {
+  width: 270px;
+  font-size: 15px;
+  border: 0;
+}
+
+
+.categories .right .search .svg .icon {
+  margin-top: 12px;
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.2;
+  color: #747474;
+}
+
+.categories .right .col {
+  margin-top: 40px;
+}
+
+.categories .right .col .svg {
+  display: flex;
+}
+
+.categories .right .col .icon {
+  width: 32px;
+  height: 32px;
+  color: #707070;
+  stroke-width: 1.5;
+}
+
+.categories .right .col .title {
+  color: #707070;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.categories .right .col .columns {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.categories .right .col .columns li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.categories .right .col .columns li:last-child {
+  border-bottom: 0;
+}
+
+.categories .right .col .columns a {
+  display: flex;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+.categories .right .col .columns a .year {
+  flex: 1;
+  font-weight: 800;
+}
+
+.categories .right .col .columns a .count {
+  justify-content: flex-end;
+  color: #707070;
+}
+
+.categories .right .cate {
+  margin-top: 40px;
+}
+
+.categories .right .cate .svg {
+  display: flex;
+}
+
+.categories .right .cate .icon {
+  width: 32px;
+  height: 32px;
+  color: #707070;
+  stroke-width: 1.5;
+}
+
+.categories .right .cate .title {
+  color: #707070;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.categories .right .cate ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.categories .right .cate li {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.categories .right .cate .tag a {
+  display: block;
+  font-size: 14px;
+  background-color: #fff;
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+.categories .blog-list {
+  margin-bottom: 40px;
+}
+
+.categories .blog-list ul {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.categories .blog-list li {
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.categories .blog-list li:last-child {
+  border: 0;
+}
+
+.categories .blog-list a {
+  display: flex;
+}
+
+.categories .blog-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.categories .time {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  color: #767676;
+}
+
+.categories .blog-list .right {
+  margin-left: 812px;
+  width: 60px;
+  height: 60px;
+}
+
+.categories .blog-list img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
+}
+
+.search {
+  margin-right: 6px;
+  margin-left: -6px;
+}
+
+.search .search-box {
+  display: flex;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 40px;
+}
+
+.search .search-box input {
+  flex: 1;
+  font-size: 18px;
+  border: 0;
+}
+
+.search .search-box .icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  stroke-width: 1.2;
+}
+
+
+.search .search-done {
+  margin-bottom: 40px;
+}
+
+.search .done {
+  font-size: 16px;
+  color: #707070;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.search .search-done-box ul {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.search .search-done-box li {
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.search .search-done-box li:last-child {
+  border: 0;
+}
+
+.search .search-done-box a {
+  display: flex;
+}
+
+.search .blog-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.search .blog-content {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  color: #767676;
+}
+
+.search .search-done-box .right {
+  margin-left: auto;
+  width: 60px;
+  height: 60px;
+}
+
+.search .search-done-box img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
+}
+
+mark {
+  background-color: yellow;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.link {
+  margin-left: -6px;
+  margin-right: 6px;
+}
+
+.link .link-card {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.link .article-header {
+  padding: 26px;
+}
+
+.link .article-header .title h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.link .blog-rooter {
+  margin-top: 24px;
+  display: flex;
+  padding: 0 30px 30px;
+}
+
+.link .blog-rooter .icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.2;
+  color: #767676;
+}
+
+.link .blog-rooter span {
+  margin-left: 14px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #767676;
+}
+
+.link .link-box {
+  margin-top: 40px;
+}
+
+.link .link-box ul {
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.link .link-box li {
+  padding: 25px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.link .link-box li:last-child {
+  border: 0;
+}
+
+.link .link-box a {
+  display: flex;
+}
+
+.link .link-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.link .link-description {
+  display: block;
+  font-size: 14px;
+  margin-top: 4px;
+  color: #767676;
+}
+
+.link .link-box .right {
+  margin-left: auto;
+  width: 60px;
+  height: 60px;
+}
+
+.link .link-box img {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 图片填满，保持比例，多余部分裁剪 */
+  display: block;
 }

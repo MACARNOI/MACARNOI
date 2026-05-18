@@ -1,46 +1,48 @@
 // js/render/renderAbout.js
 
-/**
- * 渲染“关于”页面到 #dynamic-content
- * 从 Markdown 文件加载内容并显示为文章详情
- */
 async function renderAboutPage() {
   const container = document.getElementById('dynamic-content');
-  if (!container) {
-    console.error('找不到 #dynamic-content 容器');
-    return;
-  }
+  if (!container) return;
 
-  // 显示加载中
   container.innerHTML = '<p style="text-align:center;color:#707070;">加载中...</p>';
 
   try {
-    // 1. 加载 Markdown 文件（路径根据实际情况调整）
+    // 1. 加载 Markdown 文件
     const response = await fetch('./posts/about.md');
-    if (!response.ok) throw new Error('关于页面资源不存在');
+    if (!response.ok) throw new Error('关于页面不存在');
     const mdText = await response.text();
 
     // 2. 解析 Front Matter 和正文
     const post = parseFrontMatter(mdText);
-
-    // 3. 用 marked 将正文转为 HTML
     const contentHTML = marked.parse(post.content);
 
-    // 4. 构建页面 HTML（可自行调整结构，例如添加一个返回按钮或背景卡片）
-    const pageHTML = `
-      <div class="about-page">
-        <article class="post-detail">
-          <h1 class="post-title">${post.title}</h1>
-          ${post.date ? `<time class="post-date">${post.date}</time>` : ''}
-          <div class="post-body">
+    // 3. 构建完整的关于页面 HTML（头部固定，正文插入，版权栏固定）
+    const aboutHTML = `
+      <div class="about">
+        <article class="main-article">
+          <header class="article-header">
+            <div class="title">
+              <h2><a href="#">关于</a></h2>
+            </div>
+          </header>
+          <section class="article-content">
             ${contentHTML}
-          </div>
+          </section>
         </article>
+        <div class="blog-rooter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-copyright">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173" />
+          </svg>
+          <span>Licensed under CC BY-NC-SA 4.0</span>
+        </div>
       </div>
     `;
 
-    // 5. 插入容器
-    container.innerHTML = pageHTML;
+    container.innerHTML = aboutHTML;
 
   } catch (error) {
     console.error('渲染关于页面失败:', error);
@@ -48,33 +50,23 @@ async function renderAboutPage() {
   }
 }
 
-/**
- * 解析 Markdown 文件中的 Front Matter（元数据）
- * 与 renderBlogCards.js 中相同的函数，可后续提取为公共工具
- * @param {string} mdText 原始 Markdown 字符串
- * @returns {{ title: string, date: string, content: string }}
- */
+// 解析 Front Matter（与之前相同，可提取为公共函数）
 function parseFrontMatter(mdText) {
   const match = mdText.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)/);
   if (!match) {
-    return {
-      title: '关于',
-      date: '',
-      content: mdText
-    };
+    return { title: '关于', date: '', content: mdText };
   }
-
   const frontMatterStr = match[1];
   const body = match[2];
-
   const meta = {};
   frontMatterStr.split('\n').forEach(line => {
-    const [key, ...rest] = line.split(':');
-    if (key && rest.length) {
-      meta[key.trim()] = rest.join(':').trim();
+    const idx = line.indexOf(':');
+    if (idx !== -1) {
+      const key = line.slice(0, idx).trim();
+      const value = line.slice(idx + 1).trim();
+      meta[key] = value;
     }
   });
-
   return {
     title: meta.title || '关于',
     date: meta.date || '',
@@ -82,5 +74,4 @@ function parseFrontMatter(mdText) {
   };
 }
 
-// 挂载到全局，以便 sidebarEvents.js 中调用
 window.renderAboutPage = renderAboutPage;
