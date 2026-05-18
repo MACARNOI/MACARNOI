@@ -1,9 +1,16 @@
 [
   {
+    "path": "about.md",
+    "title": "未命名",
+    "subtitle": "",
+    "date": "",
+    "cover": "./assets/images/blog.png"
+  },
+  {
     "path": "生活分享/2026-03-donation.md",
-    "title": "2026年3月捐赠月度总结",
-    "subtitle": "2026年3月TouchGal的用户捐赠月度总结",
-    "date": "2026-11-10",
-    "cover": "./assets/images/blog/blog.png"
+    "title": "未命名",
+    "subtitle": "",
+    "date": "",
+    "cover": "./assets/images/blog.png"
   }
 ]
