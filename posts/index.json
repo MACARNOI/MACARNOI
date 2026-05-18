@@ -1,9 +1,9 @@
 [
   {
     "path": "生活分享/2026-03-donation.md",
-    "title": "未命名",
-    "subtitle": "",
-    "date": "",
+    "title": "博客功能全测试",
+    "subtitle": "验证文章渲染、目录、搜索、代码高亮等特性",
+    "date": "2026-05-20T00:00:00.000Z",
     "cover": "./assets/images/blog.png"
   }
 ]
