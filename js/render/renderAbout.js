@@ -8,7 +8,7 @@ async function renderAboutPage() {
 
   try {
     // 1. 加载 Markdown 文件
-    const response = await fetch('./posts/about.md');
+    const response = await fetch('./pages/about.md');
     if (!response.ok) throw new Error('关于页面不存在');
     const mdText = await response.text();
 
