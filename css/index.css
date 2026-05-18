@@ -475,6 +475,8 @@ body {
 }
 
 .blog .left {
+  display: block;
+  width: 922px;
   background-color: #fff;
   margin-right: 412px;
   border-radius: 10px;
